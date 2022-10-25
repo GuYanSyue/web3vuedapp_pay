@@ -21,6 +21,7 @@ export const useCryptoStore = defineStore('user', () => {
   const showTWDtoGwei = ref('123')
   const showdepositTxn = ref()
   const TWDtoEth = ref()
+  const showTWDtoEth = ref('123')
 
   async function getBalance() {
     setLoader(true)
@@ -91,7 +92,8 @@ export const useCryptoStore = defineStore('user', () => {
         // gwei to wei -> 乘以10的9次
         TWDtoGwei = TWDtoGwei * 1000000000 / 50000 // gwei
         showTWDtoGwei.value = TWDtoGwei
-        TWDtoEth.value = TWDtoEth.value / 1e9
+        TWDtoEth.value = TWDtoGwei / 1e9
+        showTWDtoEth.value = TWDtoEth.value
 
         const costInput = await SimplePayContract.itemcost(TWDtoGwei)
 
@@ -120,14 +122,14 @@ export const useCryptoStore = defineStore('user', () => {
         const SimplePayContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
         const overrides = {
-          value: ethers.utils.parseEther('.00002'),
+          value: ethers.utils.parseEther('.0001'),
           gasLimit: 300000,
         }
 
         const _sig = ethers.utils.arrayify (Sig.value)
 
         // const bytes32 = ethers.utils.formatBytes32String(Sig.value)
-        const depositTxn = await SimplePayContract.deposit(_sig)
+        const depositTxn = await SimplePayContract.deposit(_sig, overrides)
 
         console.log('loading....', depositTxn)
         await depositTxn.wait()
@@ -214,6 +216,7 @@ export const useCryptoStore = defineStore('user', () => {
     showTWDtoGwei,
     TWDtoEth,
     showdepositTxn,
+    showTWDtoEth,
   }
 })
 

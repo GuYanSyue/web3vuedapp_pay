@@ -7,11 +7,10 @@ import crypto_, { useCryptoStore } from '../store/crypto'
 // import crypto_ from '../store/user'
 
 const defineStore = useCryptoStore()
-const { mint, deposit, itemcost, onSign, connectWallet } = useCryptoStore()
-const { account, showTWDtoGwei, TWDtoEth, showdepositTxn } = storeToRefs(defineStore)
+const { deposit, itemcost, onSign, connectWallet } = useCryptoStore()
+const { account, showTWDtoGwei, TWDtoEth, showdepositTxn, showTWDtoEth } = storeToRefs(defineStore)
 
 const getAmount = ref(0)
-const amountInput = ref(null as any)
 </script>
 
 <template>
