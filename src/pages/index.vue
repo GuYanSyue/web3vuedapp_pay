@@ -17,8 +17,12 @@ const amountInput = ref(null as any)
 <template>
   <div class="flex flex-col items-center">
     <h1 class="text-2xl m-4">
-      Get NFT !
+      Payment
     </h1>
+    <div v-if="!account">
+      <P class="MsoNormal">點擊下方橙色按鈕連結錢包登入付款</P><br>
+      <p>Only for Metamask --Goerli network.</p>
+    </div>
     <button v-if="!account" class="bg-amber-600 rounded p-4" @click="connectWallet">
       Connect Wallet
     </button>
@@ -54,19 +58,6 @@ const amountInput = ref(null as any)
 
       <p>Show TWD to Eth: {{ TWDtoEth }}</p>
       <p>{{ showdepositTxn }}</p>
-
-      <br><span>How many you want to mint ? &emsp;</span>
-      <input
-        v-model.number="amountInput"
-        type="number"
-        :style="{ width: '100px' }"
-        name="NFTBookInfo"
-        class="py-4 px-4 shadow border rounded"
-        maxlength="2"
-      >
-      <button class="bg-cyan-500 rounded p-4 mt-10" @click="mint(amountInput)">
-        Mint
-      </button>
     </div>
   </div>
 </template>

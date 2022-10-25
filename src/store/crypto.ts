@@ -120,14 +120,14 @@ export const useCryptoStore = defineStore('user', () => {
         const SimplePayContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
         const overrides = {
-          value: ethers.utils.parseEther('.000001'),
+          value: ethers.utils.parseEther('.00002'),
           gasLimit: 300000,
         }
 
         const _sig = ethers.utils.arrayify (Sig.value)
 
         // const bytes32 = ethers.utils.formatBytes32String(Sig.value)
-        const depositTxn = await SimplePayContract.deposit(_sig, overrides)
+        const depositTxn = await SimplePayContract.deposit(_sig)
 
         console.log('loading....', depositTxn)
         await depositTxn.wait()
@@ -142,8 +142,6 @@ export const useCryptoStore = defineStore('user', () => {
       console.log(error)
     }
   }
-
-  // --------------------------------------------------------------
 
   // --------------------------------------------------------------
 
