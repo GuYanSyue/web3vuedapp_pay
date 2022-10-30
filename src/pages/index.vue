@@ -8,7 +8,7 @@ import crypto_, { useCryptoStore } from '../store/crypto'
 
 const defineStore = useCryptoStore()
 const { deposit, itemcost, onSign, connectWallet } = useCryptoStore()
-const { account, showTWDtoGwei, TWDtoEth, showdepositTxn, showTWDtoEth } = storeToRefs(defineStore)
+const { account, showTWDtoGwei, TWDtoEth, showdepositTxn } = storeToRefs(defineStore)
 
 const getAmount = ref(0)
 </script>
@@ -51,7 +51,7 @@ const getAmount = ref(0)
 
       <p>Show TWD to Gwei: {{ showTWDtoGwei }}</p>
 
-      <button class="bg-cyan-400 rounded p-4 mt-10" @click="deposit()">
+      <button class="bg-cyan-400 rounded p-4 mt-10" @click="deposit(getAmount)">
         deposit
       </button>
 

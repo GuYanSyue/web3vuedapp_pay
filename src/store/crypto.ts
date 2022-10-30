@@ -7,7 +7,6 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 import contractABI from '../artifacts/contracts/newPayment.sol/newPayment.json'
 const contractAddress = '0x7d9EC22cD25e4174613094B7eE0CF8fBA03A5ab9'
 
-// const Sig: number | ethers.utils.BytesLike | ethers.utils.Hexable = []
 const Sig = ref('0x')
 // 預設匯出 !重要
 export default {
@@ -45,40 +44,6 @@ export const useCryptoStore = defineStore('user', () => {
   }
 
   // ------------------------------------------------------
-  async function mint(amountInput: any) {
-    console.log('setting loader')
-    setLoader(true)
-    try {
-      console.log('got', amountInput)
-      const { ethereum } = window
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum)
-        const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
-        const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
-
-        const overrides = {
-          value: ethers.utils.parseEther('.000001'),
-          gasLimit: 200000,
-        }
-
-        // 呼叫合約函數
-        const mintTxn = await ShopPortalContract.mint(amountInput, overrides)
-
-        console.log('Mining....', mintTxn.hash)
-        await mintTxn.wait()
-        console.log('Mined -- ', mintTxn.hash)
-      }
-      else {
-        console.log('Ethereum object doesn\'t exist!')
-      }
-    }
-    catch (error) {
-      setLoader(false)
-      console.log(error)
-    }
-  }
-
-  // ------------------------------------------------------
   async function itemcost(TWDtoGwei: any) {
     console.log('setting loader')
     setLoader(true)
@@ -90,7 +55,7 @@ export const useCryptoStore = defineStore('user', () => {
         const SimplePayContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
         // gwei to wei -> 乘以10的9次
-        TWDtoGwei = TWDtoGwei * 1000000000 / 50000 // gwei
+        TWDtoGwei = TWDtoGwei * 20000 // gwei
         showTWDtoGwei.value = TWDtoGwei
         TWDtoEth.value = TWDtoGwei / 1e9
         showTWDtoEth.value = TWDtoEth.value
@@ -111,7 +76,7 @@ export const useCryptoStore = defineStore('user', () => {
     }
   }
 
-  async function deposit() {
+  async function deposit(TWD: any) {
     console.log('setting loader')
     setLoader(true)
     try {
@@ -121,8 +86,10 @@ export const useCryptoStore = defineStore('user', () => {
         const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
         const SimplePayContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
+        const send_token_amount = TWD * 0.00002
+
         const overrides = {
-          value: ethers.utils.parseEther('.0001'),
+          value: ethers.utils.parseUnits(send_token_amount.toString(), 18),
           gasLimit: 300000,
         }
 
@@ -210,7 +177,6 @@ export const useCryptoStore = defineStore('user', () => {
     Amount,
     Sig,
     onSign,
-    mint,
     itemcost,
     deposit,
     showTWDtoGwei,
