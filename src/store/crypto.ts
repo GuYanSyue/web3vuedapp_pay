@@ -5,7 +5,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 
 // import { ref } from 'vue'
 import contractABI from '../artifacts/contracts/newPayment.sol/newPayment.json'
-const contractAddress = '0x7d9EC22cD25e4174613094B7eE0CF8fBA03A5ab9'
+const contractAddress = '0x372336e2c7E30897f0c1C466C8377C3AC1347B65'
 
 const Sig = ref('0x')
 // 預設匯出 !重要
@@ -15,12 +15,13 @@ export default {
 
 export const useCryptoStore = defineStore('user', () => {
   const account = ref(null)
+  const count = ref(0)
   const loading = ref(false)
   const Amount = ref(0)
-  const showTWDtoGwei = ref('123')
+  const showTWDtoGwei = ref('non')
   const showdepositTxn = ref()
   const TWDtoEth = ref()
-  const showTWDtoEth = ref('123')
+  const showTWDtoEth = ref('non')
 
   async function getBalance() {
     setLoader(true)
@@ -60,6 +61,13 @@ export const useCryptoStore = defineStore('user', () => {
         TWDtoEth.value = TWDtoGwei / 1e9
         showTWDtoEth.value = TWDtoEth.value
 
+        // 號碼牌押在這裡
+        const nonce = (await SimplePayContract.totalCount())
+        count.value = nonce
+
+        // 清空簽名
+        Sig.value = '0x'
+
         const costInput = await SimplePayContract.itemcost(TWDtoGwei)
 
         console.log('loading....', costInput)
@@ -93,10 +101,12 @@ export const useCryptoStore = defineStore('user', () => {
           gasLimit: 300000,
         }
 
+        TWD = TWD * 20000 // gwei
         const _sig = ethers.utils.arrayify (Sig.value)
+        // const nonce = (await SimplePayContract.totalCount())
 
         // const bytes32 = ethers.utils.formatBytes32String(Sig.value)
-        const depositTxn = await SimplePayContract.deposit(_sig, overrides)
+        const depositTxn = await SimplePayContract.deposit(TWD, count.value, _sig, overrides)
 
         console.log('loading....', depositTxn)
         await depositTxn.wait()
@@ -112,6 +122,26 @@ export const useCryptoStore = defineStore('user', () => {
     }
   }
 
+  async function new_count() {
+    setLoader(true)
+    try {
+      const { ethereum } = window
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
+        const SimplePayContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+        const costInput = (await SimplePayContract.count())
+
+        console.log('loading....', costInput)
+        setLoader(false)
+      }
+    }
+    catch (e) {
+      setLoader(false)
+      console.log('e', e)
+    }
+  }
   // --------------------------------------------------------------
 
   async function connectWallet() {
@@ -129,7 +159,7 @@ export const useCryptoStore = defineStore('user', () => {
       account.value = myAccounts[0]
 
       await getBalance()
-      await onSign()
+      // await onSign()
     }
     catch (error) {
       console.log(error)
@@ -137,17 +167,22 @@ export const useCryptoStore = defineStore('user', () => {
   }
 
   // 客戶端進行鏈下簽名
-  async function onSign() {
+  // 簽署一個簡單的字符串，用於登錄服務
+  async function new_onSign(TWDtoGwei: any) {
     try {
       // 1. 建構 Provider
       const { ethereum } = window
       if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum)
-        const signer = provider.getSigner()
-        // const UDPCContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+        const provider = new ethers.providers.Web3Provider(ethereum) // 連接以太坊網路 (Provider)
+        const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
+        // const SimplePayContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+        TWDtoGwei = TWDtoGwei * 20000 // gwei
+        // const nonce = (await SimplePayContract.totalCount())
+        // count.value = nonce
 
         // 2. 簽名內容 進行 solidity Keccak256 Hash
-        const messageHsh = ethers.utils.solidityKeccak256(['string'], ['HelloWorld'])
+        const messageHsh = ethers.utils.solidityKeccak256(['uint256', 'uint256', 'address'], [TWDtoGwei, count.value, contractAddress])
 
         // 3. 轉成 bytes
         const arrayifyMessage = ethers.utils.arrayify(messageHsh)
@@ -174,15 +209,17 @@ export const useCryptoStore = defineStore('user', () => {
     loading,
     connectWallet,
     account,
+    count,
     Amount,
     Sig,
-    onSign,
     itemcost,
     deposit,
     showTWDtoGwei,
     TWDtoEth,
     showdepositTxn,
     showTWDtoEth,
+    new_onSign,
+    new_count,
   }
 })
 

@@ -7,8 +7,8 @@ import crypto_, { useCryptoStore } from '../store/crypto'
 // import crypto_ from '../store/user'
 
 const defineStore = useCryptoStore()
-const { deposit, itemcost, onSign, connectWallet } = useCryptoStore()
-const { account, showTWDtoGwei, TWDtoEth, showdepositTxn } = storeToRefs(defineStore)
+const { deposit, itemcost, connectWallet, new_onSign, new_count } = useCryptoStore()
+const { account, showTWDtoGwei, TWDtoEth, showdepositTxn, count } = storeToRefs(defineStore)
 
 const getAmount = ref(0)
 </script>
@@ -27,16 +27,6 @@ const getAmount = ref(0)
     </button>
 
     <div v-if="account" class="border shadow w-4/12 p-4 mt-10">
-      <button @click="onSign">
-        Sign with Metamask
-      </button>
-      <P>Message : HelloWorld</P>
-      <div style="word-break: break-all;">
-        <p class="m-4">
-          Signature : {{ crypto_.Sig }}
-        </p>
-      </div>
-
       <input
         v-model="getAmount"
         :style="{ width: '100px' }"
@@ -45,18 +35,32 @@ const getAmount = ref(0)
         maxlength="15"
       >
 
-      <button class="bg-cyan-500 rounded p-4 mt-10" @click="itemcost(getAmount)">
-        cost
+      <button class="bg-slate-600 rounded p-4 mt-10" @click="itemcost(getAmount)">
+        確定金額
       </button>
 
       <p>Show TWD to Gwei: {{ showTWDtoGwei }}</p>
 
+      <button class="bg-cyan-600 rounded p-4 mt-10" @click="new_onSign(getAmount)">
+        確認簽名
+      </button>
+      <div style="word-break: break-all;">
+        <p class="m-4">
+          Signature : {{ crypto_.Sig }}
+        </p>
+        <p>nonce: {{ count }}</p>
+      </div>
+
       <button class="bg-cyan-400 rounded p-4 mt-10" @click="deposit(getAmount)">
-        deposit
+        確認付款
       </button>
 
       <p>Show TWD to Eth: {{ TWDtoEth }}</p>
       <p>{{ showdepositTxn }}</p>
+
+      <!-- <button class="bg-slate-600 rounded p-4 mt-10" @click="new_count()">
+        更新count
+      </button> -->
     </div>
   </div>
 </template>
