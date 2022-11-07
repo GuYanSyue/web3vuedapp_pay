@@ -74,7 +74,7 @@ contract newPayment {
     event PurchaseConfirmed();
     event ItemReceived();
 
-    function count() public{
+    function count() public onlySeller {
         totalCount += 1;
     }
     

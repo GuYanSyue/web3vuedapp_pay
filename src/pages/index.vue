@@ -19,6 +19,7 @@ const getAmount = ref(0)
       Payment
     </h1>
     <div v-if="!account">
+      <P class="MsoNormal">～～。酸辣粉付款。～～</P><br>
       <P class="MsoNormal">點擊下方橙色按鈕連結錢包登入付款</P><br>
       <p>Only for Metamask --Goerli network.</p>
     </div>
@@ -27,6 +28,7 @@ const getAmount = ref(0)
     </button>
 
     <div v-if="account" class="border shadow w-4/12 p-4 mt-10">
+      <P class="MsoNormal" style="font-size: 1.5rem;">～～。酸辣粉付款。～～</P><br>
       <input
         v-model="getAmount"
         :style="{ width: '100px' }"
@@ -34,7 +36,6 @@ const getAmount = ref(0)
         class="py-4 px-4 shadow border rounded"
         maxlength="15"
       >
-
       <button class="bg-slate-600 rounded p-4 mt-10" @click="itemcost(getAmount)">
         確定金額
       </button>
@@ -61,6 +62,14 @@ const getAmount = ref(0)
       <!-- <button class="bg-slate-600 rounded p-4 mt-10" @click="new_count()">
         更新count
       </button> -->
+    </div>
+
+    <div v-if="account && crypto_.Onlyowner === account" class="border shadow w-4/12 p-4 mt-10">
+      <p style="font-size: 1.5rem;">Hello, owner !</p><br>
+      <p>沒事最好不要手濺按底下按鈕</p>
+      <button class="bg-red-500 rounded p-4 mt-10" @click="new_count()">
+        nonce +1
+      </button><p> &emsp;</p>
     </div>
   </div>
 </template>

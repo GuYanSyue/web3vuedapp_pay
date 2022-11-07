@@ -5,12 +5,13 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 
 // import { ref } from 'vue'
 import contractABI from '../artifacts/contracts/newPayment.sol/newPayment.json'
-const contractAddress = '0x372336e2c7E30897f0c1C466C8377C3AC1347B65'
+const contractAddress = '0x88759B88a9a6E7f4C150A55BD054B5F27368bE34'
+const Onlyowner = '0xc98e9c69119eb0b764b0d5dcbc1532de8bfc2d4f'
 
 const Sig = ref('0x')
 // 預設匯出 !重要
 export default {
-  Sig,
+  Sig, Onlyowner,
 }
 
 export const useCryptoStore = defineStore('user', () => {
@@ -102,7 +103,7 @@ export const useCryptoStore = defineStore('user', () => {
         }
 
         TWD = TWD * 20000 // gwei
-        const _sig = ethers.utils.arrayify (Sig.value)
+        const _sig = ethers.utils.arrayify(Sig.value)
         // const nonce = (await SimplePayContract.totalCount())
 
         // const bytes32 = ethers.utils.formatBytes32String(Sig.value)
