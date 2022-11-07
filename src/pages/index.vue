@@ -19,7 +19,7 @@ const getAmount = ref(0)
       Payment
     </h1>
     <div v-if="!account">
-      <P class="MsoNormal">～～。酸辣粉付款。～～</P><br>
+      <P class="MsoNormal">～～。酸辣粉付款。～～</P>
       <P class="MsoNormal">點擊下方橙色按鈕連結錢包登入付款</P><br>
       <p>Only for Metamask --Goerli network.</p>
     </div>
