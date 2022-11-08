@@ -3,7 +3,6 @@
 import { ethers } from 'ethers'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-// import { ref } from 'vue'
 import contractABI from '../artifacts/contracts/newPayment.sol/newPayment.json'
 const contractAddress = '0x88759B88a9a6E7f4C150A55BD054B5F27368bE34'
 const Onlyowner = '0xc98e9c69119eb0b764b0d5dcbc1532de8bfc2d4f'
@@ -20,7 +19,6 @@ export const useCryptoStore = defineStore('user', () => {
   const loading = ref(false)
   const Amount = ref(0)
   const showTWDtoGwei = ref('non')
-  const showdepositTxn = ref()
   const TWDtoEth = ref()
   const showTWDtoEth = ref('non')
 
@@ -217,7 +215,6 @@ export const useCryptoStore = defineStore('user', () => {
     deposit,
     showTWDtoGwei,
     TWDtoEth,
-    showdepositTxn,
     showTWDtoEth,
     new_onSign,
     new_count,
