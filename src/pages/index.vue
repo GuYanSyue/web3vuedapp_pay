@@ -85,7 +85,7 @@ const getAmount = ref(0)
 
           <p style="font-size: 1.35rem;">付款詳情</p>
           <p>
-            <br>新台幣付款金額: {{ discount }} 元<br>換算Gwei: {{ showDisGwei }} Gwei<br>換算乙太幣: {{ TWDtoEth }} Ether
+            <br>新台幣付款金額: {{ discount }} 元<br>換算Gwei: {{ showDisGwei }} gwei<br>換算乙太幣: {{ TWDtoEth }} ether
           </p>
         </div>
       </div>
