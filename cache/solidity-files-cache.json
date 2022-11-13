@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "D:\\SANIWA-mashiro\\D_Programing\\Github\\web3vuedapp_pay\\contracts\\newPayment.sol": {
-      "lastModificationDate": 1667833584191,
-      "contentHash": "91ad44d2acbfc76f77c46f4faedab40d",
+      "lastModificationDate": 1668359874603,
+      "contentHash": "0587a3829ebf6e9c4d5698e5d996a35f",
       "sourceName": "contracts/newPayment.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -35,6 +35,7 @@
         "^0.8.4"
       ],
       "artifacts": [
+        "IShopNFT",
         "newPayment"
       ]
     },

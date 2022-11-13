@@ -3,7 +3,15 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
+interface IShopNFT{ function walletOfOwner(address _owner) external view returns (uint256[] memory); }
+
 contract newPayment {
+    address public shopNFT = 0xE1E50aF61e948bda368E6E335abd17E457d28BF8;
+    
+    function walletOfOwner(address _owner) external view returns (uint256[] memory){
+        return IShopNFT(shopNFT).walletOfOwner(_owner);
+    }
+
     using ECDSA for bytes32;
 
     mapping(uint256 => bool) usedNonces;
