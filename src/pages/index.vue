@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/singleline-html-element-content-newline -->
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
@@ -16,16 +17,11 @@ const getAmount = ref(0)
 
 <template>
   <div class="flex flex-col items-center">
-    <p class="text-2xl m-4" style="font-size: 2.3rem;">
-      Payment
-    </p>
+    <p class="text-2xl m-4" style="font-size: 2.3rem;">Payment</p>
+
     <div v-if="!account">
-      <P class="MsoNormal">
-        ～～。酸辣粉付款。～～
-      </P>
-      <P class="MsoNormal">
-        點擊下方橙色按鈕連結錢包登入付款
-      </P><br>
+      <P class="MsoNormal">～～。酸辣粉付款。～～</P>
+      <P class="MsoNormal">點擊下方橙色按鈕連結錢包登入付款</P><br>
       <p>Only for Metamask --Goerli network.</p>
     </div>
     <button v-if="!account" class="bg-amber-600 rounded p-4 b-color" @click="connectWallet">
@@ -33,20 +29,9 @@ const getAmount = ref(0)
     </button>
 
     <div v-if="account" class="outsidebox">
-      <P class="tit1">
-        <span class="hide">～</span>～。酸辣粉付款。～<span class="hide">～</span>
-      </P><br>
+      <P class="tit1"><span class="hide">～</span>～。酸辣粉付款。～<span class="hide">～</span></P><br>
 
-      <p class="MsoNormal">
-        您持有本店NFT數量為:&nbsp;<span>{{ sum }}</span>&nbsp;個
-      </p>
-
-      <!-- <button class="bg-slate-500 rounded p-4 mt-10 b-color" @click="walletOfOwner(account)">
-        查看擁有的nft數量
-      </button>
-      <p>{{ showTokenIds }}</p>
-      <p>{{ sum }}</p>
-      <p> &emsp;</p> -->
+      <p class="MsoNormal">您持有本店NFT數量為:&nbsp;<span>{{ sum }}</span>&nbsp;個</p>
 
       <input
         v-model="getAmount"
@@ -63,9 +48,7 @@ const getAmount = ref(0)
       <p>Show TWD to Ether: {{ showTWDtoEth }} ether</p><br>
 
       <div style="word-break: break-all;">
-        <p style="float: right;">
-          nonce: {{ count }}
-        </p>
+        <p style="float: right;">nonce: {{ count }} </p>
       </div>
 
       <p> &emsp;</p>
@@ -101,9 +84,7 @@ const getAmount = ref(0)
         </button>
       </div>
       <div class="box">
-        <p class="m-4">
-          Signature : {{ crypto_.Sig }}
-        </p>
+        <p class="m-4">Signature : {{ crypto_.Sig }}</p>
       </div>
 
       <button class="bg-red-600 rounded p-4 mt-10 b-color" @click="deposit(getAmount)">
@@ -115,9 +96,7 @@ const getAmount = ref(0)
     </div>
 
     <div v-if="account && crypto_.Onlyowner === account" class="outsidebox">
-      <p style="font-size: 1.8rem;">
-        Hello, owner !
-      </p><br>
+      <p style="font-size: 1.8rem;">Hello, owner !</p><br>
       <p>非必要沒事最好不要手按底下按鈕</p>
       <button class="bg-red-500 rounded p-4 mt-10 b-color" @click="new_count()">
         nonce +1
