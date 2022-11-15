@@ -47,10 +47,6 @@ const getAmount = ref(0)
       <p>Show TWD to Gwei: {{ showTWDtoGwei }} gwei</p>
       <p>Show TWD to Ether: {{ showTWDtoEth }} ether</p><br>
 
-      <div style="word-break: break-all;">
-        <p style="float: right;">nonce: {{ count }} </p>
-      </div>
-
       <p> &emsp;</p>
       <p class="link-top" /><br>
 
@@ -101,6 +97,9 @@ const getAmount = ref(0)
       <button class="bg-red-500 rounded p-4 mt-10 b-color" @click="new_count()">
         nonce +1
       </button><p> &emsp;</p>
+      <div style="word-break: break-all;">
+        <p style="float: right;">nonce: {{ count }} </p>
+      </div>
     </div>
   </div>
 </template>
