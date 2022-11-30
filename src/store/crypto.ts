@@ -232,6 +232,7 @@ export const useCryptoStore = defineStore('user', () => {
         // count.value = nonce
 
         // 2. 簽名內容 進行 solidity Keccak256 Hash  (簽的是 Gwei,隨機數,合約地址)
+        // utils.solidityKeccak256( types, values )   =>   hex
         const messageHsh = ethers.utils.solidityKeccak256(['uint256', 'uint256', 'address'], [TWDtoGwei, count.value, contractAddress])
 
         // 3. 轉成 bytes
