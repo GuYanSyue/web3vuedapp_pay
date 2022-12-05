@@ -34,6 +34,7 @@ export default defineConfig({
 
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
+      dirs: 'src/pages',
       extensions: ['vue', 'md'],
     }),
 
