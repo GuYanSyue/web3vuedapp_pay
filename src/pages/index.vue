@@ -12,10 +12,6 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
     <div class="overlay" />
     <nav>
       <u><b> <font color="#FFD39B" size="7">鍋兒滾</font></b></u>
-      <ul>
-        <li><a onclick="location.href='shopping.html'">Home</a></li>
-        <li><a onclick="location.href='hotpot.html'">About</a></li>
-      </ul>
     </nav>
   </header>
 
@@ -80,7 +76,7 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
     <p>總共: <span class="total-price">{{ crypto_.totalPrice }}</span> $</p>
   </div><p>&emsp;</p>
   <div style="width: 100%;">
-    <router-link to="/buyhotpot">
+    <router-link to="/Buyingcart">
       <button class="bg-red-600 rounded p-4 b-color w-50">去結帳</button>
     </router-link><router-view />
   </div><p>&emsp;</p>

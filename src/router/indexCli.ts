@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/buyhotpot',
     name: 'Cart', // 具名路由
-    component: () => import('../pages/Buyhotpot.vue'),
+    component: () => import('../pages/Buyingcart.vue'),
   },
 ]
 

@@ -40,7 +40,7 @@ const { discount, showTWDtoEth, showDisGwei, sum, disSum, account, showTWDtoGwei
         class="py-4 px-4 shadow border rounded"
         maxlength="15"
       > -->
-      <p class="mt-10 MsoNormal" style="font-size: 28px;">台幣金額: {{ crypto_.totalPrice }}</p>
+      <p class="mt-10 MsoNormal" style="font-size: 28px;">台幣金額: {{ crypto_.totalPrice }} 元</p>
       <button class="bg-slate-500 rounded p-4 mt-2 b-color" @click="itemcost(crypto_.totalPrice.value)">
         金額確認
       </button>
