@@ -87,9 +87,10 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
       </div>
     </div><p>&emsp;</p>
   </div>
+
   <div class="outsidebox">
     <div class="itembox">
-      <div class="itempic"><img src="https://imgur.com/OWNGUEz.jpg"></div>
+      <div class="itempic"><img src="https://imgur.com/OWNGUEz.jpg" width="130px" height="130px"></div>
       <div class="itemAmount">
         <div class="itemtit">單點鴨血</div>
         <div class="amount">
@@ -101,7 +102,7 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
     </div>
 
     <div class="itembox">
-      <div class="itempic"><img src="https://imgur.com/OWNGUEz.jpg"></div>
+      <div class="itempic"><img src="https://imgur.com/OWNGUEz.jpg" width="130px" height="130px"></div>
       <div class="itemAmount">
         <div class="itemtit">單點餛飩</div>
         <div class="amount">
@@ -113,7 +114,7 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
     </div>
 
     <div class="itembox">
-      <div class="itempic"><img src="https://imgur.com/OWNGUEz.jpg"></div>
+      <div class="itempic"><img src="https://imgur.com/OWNGUEz.jpg" width="130px" height="130px"></div>
       <div class="itemAmount">
         <div class="itemtit">豬肉綜合</div>
         <div class="amount">
@@ -125,7 +126,7 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
     </div>
 
     <div class="itembox">
-      <div class="itempic"><img src="https://imgur.com/OWNGUEz.jpg"></div>
+      <div class="itempic"><img src="https://imgur.com/OWNGUEz.jpg" width="130px" height="130px"></div>
       <div class="itemAmount">
         <div class="itemtit">牛肉綜合</div>
         <div class="amount">
